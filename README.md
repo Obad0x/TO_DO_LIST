@@ -1,44 +1,71 @@
-# Note Demon App Readme
+# Task Tracker App
 
-Note Demon is a full-stack web application that I developed with the goal of learning more about full-stack development and improving my skills. The app serves as a simple note-taking platform, allowing users to create, read, update, and delete notes. It also features user authentication through a login and signup system.
+This simple Task Tracker app allows users to create, view, and toggle the completion status of tasks. The app is built using Node.js, Express, MongoDB, and Mongoose.
 
-## Features
+## Prerequisites
 
-- User Authentication: Users can sign up for an account or log in if they already have one. This ensures that their notes are securely stored and accessible only to them.
+Make sure you have the following installed:
 
-- Note Creation: Once logged in, users can easily create new notes, giving them the ability to jot down their thoughts, ideas, or any important information.
+- Node.js and npm
+- MongoDB
 
-- Note Storage: The app utilizes a database to save and organize the notes for each user. This ensures that their notes are available even if they access the app from a different device or after logging out.
+## Getting Started
 
-- Note Management: Users can view their existing notes, edit them as needed, and also delete notes that are no longer required.
+1. Clone the repository:
 
-## Technologies Used
+```bash
+git clone https://github.com/your-username/task-tracker-app.git
+cd task-tracker-app
+```
 
-Note Demon was built using a simple tech stack that includes:
+2. Install dependencies:
 
-- HTML: For creating the structure and layout of the web pages.
-- CSS: To style the app and make it visually appealing.
-- JavaScript: For implementing the interactivity and functionality of the app.
-- Bootstrap: To enhance the app's responsiveness and overall user experience.
+```bash
+npm install
+```
 
-## Running the App
+3. Set up your MongoDB database:
 
-As a unique aspect of the project, Note Demon was developed entirely on a mobile device using Termux, which demonstrates the flexibility of modern development tools.
+   - Create a `.env` file in the root directory.
+   - Add your MongoDB connection string:
 
-To run the app on your own device:
+     ```env
+     MONGODB_URI=your_mongodb_connection_string
+     ```
 
-1. Clone the repository.
-2. Open Termux on your Android device.
-3. Navigate to the project directory.
-4. Use a web server to serve the files (e.g., `python -m http.server`).
-5. Access the app in your mobile browser by visiting the server address.
+4. Run the app:
 
-## Disclaimer
+```bash
+npm start
+```
 
-Please note that Note Demon was primarily created as a learning project, and it may not be suitable for production-level use. Security and performance aspects might not be as robust as in professional applications built with dedicated frameworks and libraries.
+The app will be accessible at `http://localhost:5000`.
 
-## Contribution
+## Project Structure
 
-As this is a personal learning project, I may not actively maintain or accept contributions to the codebase. However, I am open to feedback and suggestions for improvement.
+- **`index.js`**: Entry point for the application.
+- **`model/Task.js`**: Mongoose model for tasks.
+- **`config/connectdb.js`**: Connects to the MongoDB database.
+- **`views/index.ejs`**: EJS template for displaying tasks.
+- **`views/create_task.ejs`**: EJS template for creating new tasks.
 
-Thank you for your interest in Note Demon! I hope you find it useful and insightful for your own learning journey in full-stack development. Happy note-taking!
+## Routes
+
+- **GET `/`**: Displays the list of tasks.
+- **GET `/task/add`**: Renders the form to add a new task.
+- **POST `/task/add`**: Handles the submission of the new task form.
+- **POST `/toggle/:id`**: Toggles the completion status of a task.
+
+## Usage
+
+1. Visit `http://localhost:5000` in your browser to view the list of tasks.
+2. Click on "Add Task" to open the form and submit a new task.
+3. Use the checkboxes to toggle the completion status of tasks.
+
+## Notes
+
+- The app uses EJS templates for rendering views.
+- Each task has a name and a completion status.
+- Tasks can be added and marked as completed using the provided forms and checkboxes.
+
+Feel free to customize and extend the app based on your needs!
