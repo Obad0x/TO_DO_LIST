@@ -1,78 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<title>Todo App</title>
+<link rel="stylesheet" href="/static/stylesheets/style.css" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
-
-    <h1>UNCOMPLETED TASKS</h1>
-
-    <div>
-
-      <ul>
-        <%
-        if (!tasks.completed) {
-          tasks.forEach(task => {
-            if (!task.completed) {
-      %>
-              <li>
-                <input type="checkbox" id="taskCheckbox<%= task._id %>" name="completed" <%= task.completed ? 'checked' : '' %> onchange="toggleCompletion('<%= task._id %>')">
-                <label for="taskCheckbox<%= task._id %>"><%= task.name %></label>
-              </li>
-      <%
-            } else {%>
-
-              <p> HOORAY !!! Youve Completed all your Tasks </p>
-              <%}%>
-              <%
-          });}
-         
-      %>
-                  
-    
-        </ul>
-    </div>
-
-
-
-<br>
-
-<h1>completed tasks</h1>
-
-<div>
-     
-  
-
-  
-  <ul>
-   
-    <%
-        if (tasks.completed) {
-          tasks.completed.forEach(task => {
-            
-      %>
-              <li>
-                <input type="checkbox" id="taskCheckbox<%= task._id %>" name="completed" <%= task.completed ? 'checked' : '' %> onchange="toggleCompletion('<%= task._id %>')">
-                <label for="taskCheckbox<%= task._id %>"><%= task.name %></label>
-              </li>
-      <%   
-            })}
-         
-      %>
-
-  </ul></div>
-   
-
-        <script>
-            function toggleCompletion(taskId) {
-              fetch(`/tasks/toggle/${taskId}`, {
-                method: 'POST',
-              });
-            }
-          </script>
+<div class="todo-container">
+<h2>To-Do List</h2>
+<div class="todo">
+<form action="/" method="POST" class="todo-header">
+<input type="text" name="content">
+<button type="submit"><span class="fas fa-plus"></span></button>
+</form>
+<ul class="todo-list">
+<li class="todo-list-item">
+<div class="todo-list-item-name">Some Text</div>
+<a href="" class="edit">
+<span class="fas fa-edit"></span>
+</a>
+<a href="" class="remove">
+<span class="fas fa-times"></span>
+</a>
+</li>
+</ul>
+</div>
+</div>
 </body>
-</html>
-
-
