@@ -6,14 +6,64 @@
     <title>Document</title>
 </head>
 <body>
-    <ul>
-        <% tasks.forEach(task => { %>
-          <li>
-            <input type="checkbox" id="taskCheckbox<%= task._id %>" name="completed" <%= task.completed ? 'checked' : '' %> onchange="toggleCompletion('<%= task._id %>')">
-            <label for="taskCheckbox<%= task._id %>"><%= task.name %></label>
-          </li>
-        <% }); %>
+
+    <h1>UNCOMPLETED TASKS</h1>
+
+    <div>
+
+      <ul>
+        <%
+        if (!tasks.completed) {
+          tasks.forEach(task => {
+            if (!task.completed) {
+      %>
+              <li>
+                <input type="checkbox" id="taskCheckbox<%= task._id %>" name="completed" <%= task.completed ? 'checked' : '' %> onchange="toggleCompletion('<%= task._id %>')">
+                <label for="taskCheckbox<%= task._id %>"><%= task.name %></label>
+              </li>
+      <%
+            } else {%>
+
+              <p> HOORAY !!! Youve Completed all your Tasks </p>
+              <%}%>
+              <%
+          });}
+         
+      %>
+                  
+    
         </ul>
+    </div>
+
+
+
+<br>
+
+<h1>completed tasks</h1>
+
+<div>
+     
+  
+
+  
+  <ul>
+   
+    <%
+        if (tasks.completed) {
+          tasks.completed.forEach(task => {
+            
+      %>
+              <li>
+                <input type="checkbox" id="taskCheckbox<%= task._id %>" name="completed" <%= task.completed ? 'checked' : '' %> onchange="toggleCompletion('<%= task._id %>')">
+                <label for="taskCheckbox<%= task._id %>"><%= task.name %></label>
+              </li>
+      <%   
+            })}
+         
+      %>
+
+  </ul></div>
+   
 
         <script>
             function toggleCompletion(taskId) {
