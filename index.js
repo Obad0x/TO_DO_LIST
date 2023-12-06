@@ -39,11 +39,6 @@ connectdb();
 
     
 
-app.get('/task/add', (req, res) => {
-
-    res.render('create_task');
-
-});
 
 
 app.post('/task/add', async (req, res) => {
@@ -59,18 +54,25 @@ app.post('/task/add', async (req, res) => {
     }
 })
 
-// toggle completion
+//UPDATE 
 
-app.post('/toggle/:id', async (req, res) => {
-    try {
-      const task = await Task.findById(req.params.id);
-      task.completed = !task.completed;
-      await task.save();
-      res.redirect('/');
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  });
+app.route("/edit/:id").get( async (req, res) => {
+  const id = req.params.id;
+Task.find({}, (err, tasks) => {
+res.render("edit.ejs", { todoTasks: tasks, idTask: id });})
+ 
+
+})
+.post((req, res) => {
+const id = req.params.id;
+console.log(req.body)
+Task.findByIdAndUpdate(id, { name: req.body.name}, err => {
+if (err) return res.send(500, err);
+res.redirect("/");
+});
+});
+
+
 
 app.listen(port, (req, res) => {
     console.log(`Server is runing.... , listening on port ${port}`);
